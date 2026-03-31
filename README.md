@@ -1,4 +1,4 @@
-# 🪣 Container With Most Water — Two Pointers Approach 🪣💧
+# 🪣 Container With Most Water — Two Pointers Approach 💧
 
 ### 🧠 Intuition
 
