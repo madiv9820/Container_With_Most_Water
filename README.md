@@ -1,106 +1,44 @@
-# 🪣 Container With Most Water — Two Pointers Approach 🪣💧
+# [🪣 Container With Most Water](https://leetcode.com/problems/container-with-most-water/?envType=study-plan-v2&envId=top-interview-150)
 
-### 🧠 Intuition
+Imagine you’re given an array called **`height`** with **`n`** numbers. Each number represents the height of a vertical line drawn on a graph 📊.
 
-Instead of checking all possible pairs (O(n²)) ❌, we can **optimize** the solution using the **Two Pointers technique**.
+The position of each line is its index 📍
+So the line at index **`i`** goes from **(i, 0)** up to **(i, height[i])**
 
-#### 👉 Key idea:
+Now here’s the interesting part 👇
 
-- Start with the **maximum possible width**
-- Gradually **shrink the window**
-- Always try to **improve the limiting factor (height)**
+### 🎯 Your Goal
 
-#### 📦 Formula
+Pick **any two lines** such that together with the x-axis, they form a container that can hold water 💧
 
+But wait… there’s a catch ⚠️
+- The container **cannot be tilted** (no slanting allowed 🚫)
+
+### 📏 How is water stored?
+
+The amount of water the container can hold depends on:
+- The **distance between the two lines** (width) ↔️
+- The **shorter of the two heights** (since water spills over the shorter wall) ⬇️
+
+### 🎯 What You Need to Do
+
+Find the **maximum amount of water** that can be stored by choosing the best possible pair of lines 🏆
+
+### 🧪 Example 1
 ```
-water = (right_index - left_index) * min(height[left], height[right])
-```
-
-#### 🔥 One-Line Intuition
-
-“Start with maximum width and move the pointer at the smaller height to improve the limiting factor.”
-
-### 🚀 Approach: Two Pointers
-- Initialize two pointers:
-    - **`left = 0`**
-    - **`right = n - 1`**
-- At each step:
-    1. Calculate current container area
-    2. Update maximum if needed
-    3. Move the pointer pointing to the **shorter height**
-
-### 🔥 Core Logic
-
-👉 Why move the smaller height?
-
-- Water is limited by the **shorter wall**
-- Moving the taller wall ❌ won’t help (height still limited)
-- Moving the shorter wall ✅ may increase height
-
-### 🧩 Algorithm Steps
-
-1. Initialize **`maxWater = 0`**
-2. Set **`left = 0`**, **`right = n - 1`**
-3. While **`left < right`**:
-    - width = **`right - left`**
-    - height = **`min(height[left], height[right])`**
-    - water = **`width * height`**
-    - Update **`maxWater`**
-    - Move:
-        - If **`height[left] < height[right]`** → **`left++`**
-        - Else → **`right--`**
-4. Return **`maxWater`**
-
-### 🧾 Pseudocode
-
-```
-FUNCTION maxArea(height):
-
-    left ← 0
-    right ← length(height) - 1
-    maxWater ← 0
-
-    WHILE left < right:
-
-        width ← right - left
-        minHeight ← MIN(height[left], height[right])
-
-        currentWater ← width * minHeight
-        maxWater ← MAX(maxWater, currentWater)
-
-        IF height[left] < height[right]:
-            left ← left + 1
-        ELSE:
-            right ← right - 1
-
-    RETURN maxWater
+Input:  height = [1,8,6,2,5,4,8,3,7]
+Output: 49
 ```
 
-#### 💡 Key Observations
+💡 In this case, selecting the right pair of lines forms a container that can hold **49 units of water**
 
-- 📏 Start with maximum width
-- 📉 Width decreases over time
-- 📈 Try to increase minimum height
-- 🎯 Greedy decision at each step
+### 🧪 Example 2
+```
+Input:  height = [1,1]
+Output: 1
+```
 
-### 📊 Complexity Analysis
-
-| **Metric**              | **Value**    |
-| ------------------- | -------- |
-| ⏱️ Time Complexity  | **O(n)** |
-| 📦 Space Complexity | **O(1)** |
-
-### ⚠️ Common Mistakes
-
-- ❌ Moving the taller pointer
-- ❌ Moving both pointers at once
-- ❌ Forgetting **`min(height[left], height[right])`**
-
-### 🏁 Summary
-
-- ⚡ Optimized approach using Two Pointers
-- 🎯 Focus on improving limiting height
-- 🚀 Linear time complexity
-- 💯 Interview favorite solution
-
+### 📌 Constraints
+- **`2 <= n <= 100000`**
+- **`0 <= height[i] <= 10000`**
 ---
