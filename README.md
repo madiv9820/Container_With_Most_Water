@@ -41,4 +41,29 @@ Output: 1
 ### 📌 Constraints
 - **`2 <= n <= 100000`**
 - **`0 <= height[i] <= 10000`**
+
+## 🚴🏽‍♂️ Approaches
+
+| **Feature**             | 🐌 [**Brute Force**](https://github.com/madiv9820/Container_With_Most_Water/tree/Approach_01-Brute_Force)                       | 🚀 [**Two Pointers**](https://github.com/madiv9820/Container_With_Most_Water/tree/Approach_02-Two_Pointers)                      |
+| ------------------- | ------------------------------------ | ------------------------------------ |
+| 🧠 Idea             | Check all possible pairs             | Greedy elimination of useless pairs  |
+| 🔁 Approach         | Nested loops (i, j)                  | Start from both ends and move inward |
+| ⏱️ Time Complexity  | **O(n²)** ❌                          | **O(n)** ✅                           |
+| 📦 Space Complexity | **O(1)**                             | **O(1)**                             |
+| 📏 Width Handling   | Explicitly calculated for every pair | Starts maximum, then shrinks         |
+| 📐 Height Handling  | Uses `min(height[i], height[j])`     | Same, but optimized selection        |
+| ⚡ Efficiency        | Slow for large inputs                | Very fast 🚀                         |
+| 🧩 Implementation   | Simple                               | Slightly tricky (requires intuition) |
+| 🎯 Optimality       | ❌ Not optimal                        | ✅ Optimal solution                   |
+| 🧪 Use Case         | Learning / baseline                  | Production / interviews              |
+
+#### 💡 Key Takeaway
+
+- 🐌 Brute Force → Try everything
+- 🚀 Two Pointers → Think smart, skip useless work
+
+#### 🧠 One-Line Difference
+
+“Brute force checks all pairs, while two pointers intelligently eliminate pairs that cannot give a better result.”
+
 ---
