@@ -1,44 +1,100 @@
-# [🪣 Container With Most Water](https://leetcode.com/problems/container-with-most-water/?envType=study-plan-v2&envId=top-interview-150)
+# 🪣 Container With Most Water — Brute Force Approach 💧
 
-Imagine you’re given an array called **`height`** with **`n`** numbers. Each number represents the height of a vertical line drawn on a graph 📊.
+### 🧠 Intuition
 
-The position of each line is its index 📍
-So the line at index **`i`** goes from **(i, 0)** up to **(i, height[i])**
+We are given an array where each element represents the height of a vertical line.
+We need to pick **two lines** such that together with the x-axis, they form a container that holds the **maximum water**.
 
-Now here’s the interesting part 👇
+👉 The amount of water a container can store depends on:
 
-### 🎯 Your Goal
+- **📏 Width** → distance between two lines
+- **📐 Height** → minimum of the two heights (shorter wall limits water)
 
-Pick **any two lines** such that together with the x-axis, they form a container that can hold water 💧
+#### 📦 Formula
 
-But wait… there’s a catch ⚠️
-- The container **cannot be tilted** (no slanting allowed 🚫)
-
-### 📏 How is water stored?
-
-The amount of water the container can hold depends on:
-- The **distance between the two lines** (width) ↔️
-- The **shorter of the two heights** (since water spills over the shorter wall) ⬇️
-
-### 🎯 What You Need to Do
-
-Find the **maximum amount of water** that can be stored by choosing the best possible pair of lines 🏆
-
-### 🧪 Example 1
 ```
-Input:  height = [1,8,6,2,5,4,8,3,7]
-Output: 49
+water = (right_index - left_index) * min(height[left], height[right])
 ```
 
-💡 In this case, selecting the right pair of lines forms a container that can hold **49 units of water**
+### 🔁 Approach: Brute Force (Exhaustive Search)
 
-### 🧪 Example 2
+- Try **all possible pairs** of lines **`(i, j)`** where **`i < j`**
+- For each pair:
+    - Calculate width
+    - Calculate height (minimum of two lines)
+    - Compute water stored
+- Keep track of the **maximum value**
+
+### 🧩 Algorithm Steps
+
+1. Initialize **`maxWater = 0`**
+2. Loop through each index **`i`**
+3. For each **`i`**, loop through all **`j > i`**
+4. Compute:
+    - width = **`j - i`**
+    - height = **`min(height[i], height[j])`**
+    - water = **`width * height`**
+5. Update **`maxWater`**
+6. Return **`maxWater`**
+
+### 🧾 Pseudocode
+
 ```
-Input:  height = [1,1]
-Output: 1
+FUNCTION maxArea(height):
+
+    maxWater ← 0
+    n ← length of height
+
+    FOR i FROM 0 TO n - 2:
+        FOR j FROM i + 1 TO n - 1:
+
+            width ← j - i
+            minHeight ← MIN(height[i], height[j])
+
+            currentWater ← width * minHeight
+
+            maxWater ← MAX(maxWater, currentWater)
+
+    RETURN maxWater
 ```
 
-### 📌 Constraints
-- **`2 <= n <= 100000`**
-- **`0 <= height[i] <= 10000`**
+#### 💡 Key Observations from Pseudocode
+
+- 🔁 Two nested loops → all pairs are checked
+- 📐 Width depends on index difference
+- 📏 Height depends on shorter line
+- 🏆 Track maximum continuously
+
+#### 💻 Implementations
+
+This approach is implemented in multiple languages:
+- 🐍 Python (simple and readable)
+- ⚙️ C++ (using vector)
+- 🧱 C (using raw arrays + macros)
+
+### 📊 Complexity Analysis
+
+| **Metric**              | **Value**     |
+| ------------------- | --------- |
+| ⏱️ Time Complexity  | **O(n²)** |
+| 📦 Space Complexity | **O(1)**  |
+
+### ⚠️ Limitations
+
+- ❌ Not efficient for large inputs
+- ❌ Evaluates all possible pairs unnecessarily
+- ❌ Can lead to **TLE (Time Limit Exceeded)** in interviews
+
+### 💡 When to Use This Approach?
+
+- ✅ When starting to understand the problem
+- ✅ For explaining logic in interviews
+- ✅ As a baseline before optimization
+
+### 🚀 What’s Next?
+
+This brute force approach helps build intuition, but it can be optimized.
+
+👉 Next step: **Two Pointer Approach (O(n))** — avoids unnecessary checks and improves performance significantly.
+
 ---
